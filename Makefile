@@ -1,30 +1,25 @@
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
+BUFFER_SIZE = 3
 
 NAME = get_next_line
 
-SRCS =
-
-BSRCS =
-
-OBJS = ${SRCS:.c=.o}
-
-BOBJS = ${BSRCS:.c=.o}
+SRCS = get_next_line.c main.c get_next_line_utils.c
 
 all: ${NAME}
 
-${NAME}: ${OBJS}
-        $(CC) ${CFLAGS} -o ${NAME} ${OBJS}
+${NAME}: ${SRCS}
+	$(CC) ${CFLAGS} -o ${NAME} -D BUFFER_SIZE=${BUFFER_SIZE} ${SRCS}
 
-%.o: %.c
-        ${CC} ${CFLAGS} -c $< -o $@
+simple: ${SRCS}
+	$(CC) ${CFLAGS} -o ${NAME} ${SRCS}
 
 clean:
-        rm -rf *.o
+	rm -rf *.o
 
 fclean: clean
-        rm -rf ${NAME}
+	rm -rf ${NAME}
 
-re: clean all
+re: fclean all
 
 .PHONY: all clean fclean re
