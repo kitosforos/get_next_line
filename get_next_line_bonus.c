@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marcoalo <marcoalo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/19 18:36:49 by kitos             #+#    #+#             */
-/*   Updated: 2025/01/20 11:40:04 by marcoalo         ###   ########.fr       */
+/*   Created: 2025/01/20 13:13:46 by marcoalo          #+#    #+#             */
+/*   Updated: 2025/01/20 13:14:39 by marcoalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*update_remainder(char *remainder)
+static char	*update_remainder(char *remainder)
 {
 	int		i;
 	int		j;
@@ -38,7 +38,7 @@ char	*update_remainder(char *remainder)
 	return (new_rem);
 }
 
-char	*get_clean_line(char *remainder)
+static char	*get_clean_line(char *remainder)
 {
 	int		i;
 	char	*line;
@@ -63,7 +63,7 @@ char	*get_clean_line(char *remainder)
 	return (line);
 }
 
-char	*process_remainder(char *remainder, char *buf, int bytes_read)
+static char	*process_remainder(char *remainder, char *buf, int bytes_read)
 {
 	char	*temp;
 
@@ -84,7 +84,7 @@ char	*process_remainder(char *remainder, char *buf, int bytes_read)
 	return (remainder);
 }
 
-char	*read_into_remainder(int fd, char *remainder)
+static char	*read_into_remainder(int fd, char *remainder)
 {
 	char	*buf;
 	int		bytes_read;
@@ -107,14 +107,14 @@ char	*read_into_remainder(int fd, char *remainder)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*remainder;
+	static char	*remainders[MAX_FD];
 
-	if (fd < 0 || BUFFER_SIZE < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FD)
 		return (NULL);
-	remainder = read_into_remainder(fd, remainder);
-	if (!remainder)
+	remainders[fd] = read_into_remainder(fd, remainders[fd]);
+	if (!remainders[fd])
 		return (NULL);
-	line = get_clean_line(remainder);
-	remainder = update_remainder(remainder);
+	line = get_clean_line(remainders[fd]);
+	remainders[fd] = update_remainder(remainders[fd]);
 	return (line);
 }
