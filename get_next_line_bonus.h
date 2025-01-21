@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marcoalo <marcoalo@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: marcoalo <marcoalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:12:56 by kitos             #+#    #+#             */
-/*   Updated: 2025/01/20 13:13:37 by marcoalo         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:06:21 by marcoalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@
 # endif
 
 char			*get_next_line(int fd);
-unsigned long	ft_strlen(const char *s);
-char			*ft_strjoin(char const *s1, char const *s2);
-char			*ft_strchr(const char *str, int c);
-char			*ft_strdup(const char *src);
 
+int				ft_strlen(char *s);
+
+char			*ft_strjoin(char *s1, char *s2);
+
+char			*ft_strrchr(char *s, int c);
+
+char			*ft_substr(char *s, int start, int len);
+
+void			*ft_calloc(size_t nitems, size_t size);
 #endif

@@ -1,6 +1,0 @@
-Buenas tardes a todos.
-Esto es un archivo de prueba.
-Si, tengo que volver a hacer el get_next_line de nuevo.
-Y si, tambien, voy a hacerlo sin copiarlo.
-Lo intentare ahcer en una tarde.
-Un saludo cracks!
